@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option go_package = "rowio";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+
+service RowIOService {
+  rpc Set (SetRequest) returns (google.protobuf.Empty) {
+  }
+  rpc Get (GetRequest) returns (GetResponse) {
+  }
+  rpc Scan (ScanRequest) returns (stream ScanStream) {
+  }
+}
+
+message SetRequest {
+  string bucket = 1;
+  bytes key = 2;
+  google.protobuf.Any value = 3;
+}
+
+message GetRequest {
+  string bucket = 1;
+  bytes key = 2;
+}
+
+message GetResponse {
+  google.protobuf.Any value = 1;
+}
+
+message ScanRequest {
+  string bucket = 1;
+  bytes fromKey = 2;
+  bytes toKey = 3;
+}
+
+message ScanStream {
+  bytes key = 1;
+  google.protobuf.Any value = 2;
+}

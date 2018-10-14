@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "protos";
+
+message User {
+  string username = 1;
+}
+
+message Log {
+  string message = 2;
+}
+
+message Incompat {}
